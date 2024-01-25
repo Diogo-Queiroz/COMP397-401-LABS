@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _groudnRadius = 0.5f;
     [SerializeField] LayerMask _groundMaks;
     [SerializeField] bool _isGrounded;
+    [Header("Respawn Transform")]
+    [SerializeField] Transform _respawn;
 
     void Awake()
     {
@@ -69,5 +71,16 @@ public class PlayerController : MonoBehaviour
     void DebugMessage(InputAction.CallbackContext context)
     {
         Debug.Log($"Move Perfomed {context.ReadValue<Vector2>().x}, {context.ReadValue<Vector2>().y}");
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log($"Colliding with {other.tag}");
+        if (other.CompareTag("deathZone"))
+        {
+            _controller.enabled = false;
+            transform.position = _respawn.position;
+            _controller.enabled = true;
+        }
     }
 }

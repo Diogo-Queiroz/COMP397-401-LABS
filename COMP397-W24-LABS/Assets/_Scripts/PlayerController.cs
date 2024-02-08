@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : Subject
 {
     PlayerControl _inputs;
     Vector2 _move;
@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
             _velocity.y = -2.0f;
         }
         Vector3 movement = new Vector3(_move.x, 0.0f, _move.y) * _speed * Time.fixedDeltaTime;
+        if (!_controller.enabled) { return; }
         _controller.Move(movement);
         _velocity.y += _gravity * Time.fixedDeltaTime;
         _controller.Move(_velocity * Time.fixedDeltaTime);
@@ -65,6 +66,7 @@ public class PlayerController : MonoBehaviour
         if (_isGrounded)
         {
             _velocity.y = Mathf.Sqrt(_jumpHeight * -2.0f * _gravity);
+            NotifyObservers(PlayerEnums.Jump);
         }
     }
 
@@ -75,12 +77,12 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"Colliding with {other.tag}");
         if (other.CompareTag("deathZone"))
         {
             _controller.enabled = false;
             transform.position = _respawn.position;
             _controller.enabled = true;
+            NotifyObservers(PlayerEnums.Died);
         }
     }
 }

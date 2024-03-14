@@ -95,10 +95,15 @@ public class PlayerController : Subject
     {
         if (other.CompareTag("deathZone"))
         {
-            _controller.enabled = false;
-            transform.position = _respawn.position;
-            _controller.enabled = true;
+            MovePlayerPosition(_respawn.position);
             NotifyObservers(PlayerEnums.Died);
         }
+    }
+
+    public void MovePlayerPosition(Vector3 pos)
+    {
+        _controller.enabled = false;
+        transform.position = pos;
+        _controller.enabled = true;
     }
 }

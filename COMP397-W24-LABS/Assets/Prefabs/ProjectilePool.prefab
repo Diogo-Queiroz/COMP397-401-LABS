@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 7243684833846021016}
   - component: {fileID: 1474328592444698187}
   - component: {fileID: 4004058251873305240}
-  - component: {fileID: 3594009773996276511}
+  - component: {fileID: -4396431650597794198}
   m_Layer: 0
-  m_Name: Projectile
+  m_Name: ProjectilePool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,7 +135,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3594009773996276511
+--- !u!114 &-4396431650597794198
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,9 +144,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6310094590285375360}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adce6d59e24023f458b4f40a5788909b, type: 3}
+  m_Script: {fileID: 11500000, guid: 51ef352cdb806e447809c37f1bbde1fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lifeTime: 0
+  _maxLifeTime: 1.75
 --- !u!1 &8317629020678662264
 GameObject:
   m_ObjectHideFlags: 0

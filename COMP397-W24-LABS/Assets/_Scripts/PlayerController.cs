@@ -56,7 +56,9 @@ public class PlayerController : Subject
         {
             _velocity.y = -2.0f;
         }
+#if !UNITY_EDITOR
         _move = _joystick.Direction;
+#endif
         _camForward = _camera.transform.forward;
         _camRight = _camera.transform.right;
         _camForward.y = 0.0f;
